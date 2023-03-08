@@ -37,11 +37,6 @@ Então será mostrado uma mensagem de erro informando que não foram encontradas
 
 Scenario: Busca sem filtro
 Dado que eu estou na "página de busca"
-<<<<<<< Updated upstream
-Quando eu seleciono a opção de iniciar busca
-Então serão listadas na página músicas, playlists e artistas populares
-=======
 E não há filtros selecionados
 Quando eu dou início a uma busca
 Então serão listadas na página músicas, playlists e artistas populares
->>>>>>> Stashed changes
