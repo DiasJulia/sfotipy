@@ -6,25 +6,42 @@
       </a>
     </div>
     <div class="input-group">
-      <div class="input-box">
-        <label for="email" class="nomes-input">E-mail</label>
-        <label for="email">
-          <img src="../../assets/email_branco.svg" class="icones" id="email-i" alt="icone de email">
-        </label>
-        <input id="email" type="email" name="email" placeholder="exemplo@gmail.com" required>
-      </div>
+      <Form [formGroup]="LoginForm" (ngSubmit)="submit()" #formDir="ngForm">
+        <div class="input-box">
+          <label for="email" class="nomes-input">E-mail</label>
+          <label for="email">
+            <img src="../../assets/email_branco.svg" class="icones" id="email-i" alt="icone de email">
+          </label>
+          <input id="email" type="email" name="email" placeholder="exemplo@gmail.com" formControlName="email">
+          <div class="validation-error">
+            <div *ngIf="(email.touched || submitted) && email.errors?.['required']"><img
+                src="../../assets/erro_input.svg">
+              <p>O email é obrigatório!</p>
+            </div>
+            <div *ngIf="email.touched && email.errors?.['email']"><img src="../../assets/erro_input.svg">
+              <p>Email inválido!</p>
+            </div>
+          </div>
+        </div>
 
-      <div class="input-box">
-        <label for="password" class="nomes-input">Senha</label>
-        <label for="password">
-          <img src="../../assets/senha_branco.svg" class="icones" id="senha-i" alt="icone de senha">
-        </label>
-        <input id="password" type="password" name="password" placeholder="••••••••" required>
-      </div>
+        <div class="input-box">
+          <label for="password" class="nomes-input">Senha</label>
+          <label for="password">
+            <img src="../../assets/senha_branco.svg" class="icones" id="senha-i" alt="icone de senha">
+          </label>
+          <input id="password" type="password" name="password" placeholder="••••••••" formControlName="senha">
+          <div class="validation-error">
+            <div *ngIf="(senha.touched || submitted) && senha.errors?.['required']"><img
+                src="../../assets/erro_input.svg">
+              <p> A senha precisa ser inserida!</p>
+            </div>
+          </div>
+        </div>
 
-      <a routerLink="/esqueci_senha" class="esqueceu-senha">Esqueceu sua senha?</a>
-      <div class="entrar-botao"><button><a href="#" class="input-box">Entrar</a></button>
-      </div>
+        <a routerLink="/esqueci_senha" class="esqueceu-senha">Esqueceu sua senha?</a>
+        <div class="entrar-botao"><button type="submit">Entrar</button>
+        </div>
+      </Form>
     </div>
     <div class="container-cadastro">
       <p class="p-cadastro">Ainda não possui uma conta?</p>

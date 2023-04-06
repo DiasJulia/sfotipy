@@ -117,17 +117,53 @@ input::placeholder {
     height: 4rem;
     margin-top: 1rem;
     border: none;
+}
+
+.esqueci-botao :disabled {
+    background-color: rgba(0, 0, 0, 0.25);
+    cursor: standart;
+}
+
+.esqueci-botao button:enabled {
+    background: #1A7FC1;
     cursor: pointer;
 }
 
-.esqueci-botao button:hover {
+.esqueci-botao button:enabled:hover {
     background: rgba(26, 127, 193, 0.7)
 }
 
-.esqueci-botao button a {
+.esqueci-botao button {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 32px;
     color: #E1E1E1;
     text-decoration: none;
+}
+
+.validation-error div {
+    display: flex;
+    align-items: center;
+
+    margin-top: -3%;
+    margin-bottom: 0.1rem;
+}
+
+.validation-error div img {
+    width: 2rem;
+    height: 2rem;
+    padding-right: 0.5rem;
+    padding-left: 0.2rem;
+}
+
+.validation-error div p {
+    font-family: 'Aldrich', sans-serif;
+    font-style: normal;
+    color: #FF3737;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.validation-error {
+    border-color: #FF3737;
 }

@@ -7,7 +7,7 @@
 
 .tela-login {
     width: 680px;
-    height: 640px;
+    height: 680px;
     display: flex;
     flex-direction: column;
     background: #86929B;
@@ -124,7 +124,7 @@ input::placeholder {
     background: rgba(26, 127, 193, 0.7)
 }
 
-.entrar-botao button a {
+.entrar-botao button {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 32px;
@@ -154,4 +154,31 @@ input::placeholder {
 
 .cadastro:hover {
     text-decoration: underline;
+}
+
+.validation-error div {
+    display: flex;
+    align-items: center;
+
+    margin-top: -2%;
+    margin-bottom: 0.3rem;
+}
+
+.validation-error div img {
+    width: 2rem;
+    height: 2rem;
+    padding-right: 0.5rem;
+    padding-left: 0.2rem;
+}
+
+.validation-error div p {
+    font-family: 'Aldrich', sans-serif;
+    font-style: normal;
+    color: #FF3737;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.validation-error {
+    border-color: #FF3737;
 }
