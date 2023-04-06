@@ -14,11 +14,12 @@
             <img src="../../assets/email_branco.svg" class="icones" id="email-i" alt="icone de email">
           </label>
           <input id="email" type="email" name="email" placeholder="exemplo@gmail.com" formControlName="email">
-          <div *ngIf="email.touched && email.invalid" class="validation-error">
-            <div *ngIf="email.errors?.['required']"><img src="../../assets/erro_input.svg">
+          <div class="validation-error">
+            <div *ngIf="(email.touched || submitted) && email.errors?.['required']"><img
+                src="../../assets/erro_input.svg">
               <p>O email é obrigatório!</p>
             </div>
-            <div *ngIf="email.errors?.['email']"><img src="../../assets/erro_input.svg">
+            <div *ngIf="email.touched && email.errors?.['email']"><img src="../../assets/erro_input.svg">
               <p>Email inválido!</p>
             </div>
           </div>
@@ -30,8 +31,9 @@
             <img src="../../assets/senha_branco.svg" class="icones" id="senha-i" alt="icone de senha">
           </label>
           <input id="senha" type="password" name="senha" placeholder="••••••••" formControlName="senha">
-          <div *ngIf="senha.touched && senha.invalid" class="validation-error">
-            <div *ngIf="senha.errors?.['required']"><img src="../../assets/erro_input.svg">
+          <div class="validation-error">
+            <div *ngIf="(senha.touched || submitted) && senha.errors?.['required']"><img
+                src="../../assets/erro_input.svg">
               <p> A senha precisa ser inserida!</p>
             </div>
           </div>
@@ -44,11 +46,13 @@
           </label>
           <input id="ConfirmarSenha" type="password" name="ConfirmarSenha" placeholder="••••••••"
             formControlName="ConfirmarSenha">
-          <div *ngIf="ConfirmarSenha.touched && ConfirmarSenha.invalid" class="validation-error">
-            <div *ngIf="ConfirmarSenha.errors?.['required']"><img src="../../assets/erro_input.svg">
+          <div class="validation-error">
+            <div *ngIf="(ConfirmarSenha.touched || submitted) && ConfirmarSenha.errors?.['required']"><img
+                src="../../assets/erro_input.svg">
               <p>É obrigatório confirmar a sua senha </p>
             </div>
-            <div *ngIf="ConfirmarSenha.errors?.['confirmedValidator']"><img src="../../assets/erro_input.svg">
+            <div *ngIf="ConfirmarSenha.touched && ConfirmarSenha.errors?.['passwordMismatch']"><img
+                src="../../assets/erro_input.svg">
               <p> As senhas não coincidem!</p>
             </div>
           </div>
@@ -60,8 +64,9 @@
             <img src="../../assets/usuario_branco.svg" class="icones" id="usuario-i" alt="icone de usuario">
           </label>
           <input id="nome" type="text" name="nome" placeholder="Insira um nome de perfil" formControlName="nome">
-          <div *ngIf="nome.touched && nome.invalid" class="validation-error">
-            <div *ngIf="nome.errors?.['required']"><img src="../../assets/erro_input.svg">
+          <div class="validation-error">
+            <div *ngIf="(nome.touched || submitted) && nome.errors?.['required']"><img
+                src="../../assets/erro_input.svg">
               <p>Insira um nome </p>
             </div>
           </div>

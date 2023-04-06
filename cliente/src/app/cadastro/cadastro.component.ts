@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
+
+import { CustomvalidationService } from './Validators_extras';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,16 +14,24 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
   constructor(
+    private fb: FormBuilder,
+    private customValidator: CustomvalidationService
   ) { }
 
   ngOnInit(): void {
-    this.RegisterForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      senha: new FormControl('', [Validators.required]),
-      ConfirmarSenha: new FormControl('', [Validators.required]),
-      nome: new FormControl('', [Validators.required])
-    }
+    this.RegisterForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required]],
+      ConfirmarSenha: ['', [Validators.required]],
+      nome: ['', Validators.required],
+    },
+      {
+        validator: this.customValidator.MatchPassword('senha', 'ConfirmarSenha'),
+      }
     );
+  }
+  get registerFormControl() {
+    return this.RegisterForm.controls;
   }
 
   get email() {
@@ -36,6 +46,8 @@ export class RegisterComponent implements OnInit {
   get nome() {
     return this.RegisterForm.get('nome')!;
   }
+
+
 
   submit() {
     if (this.RegisterForm.invalid) {

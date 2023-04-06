@@ -74,17 +74,22 @@ input::placeholder {
     color: rgba(255, 255, 255, 0.6)
 }
 
+/*    background: #1A7FC1;
+*/
 .cadastro-botao button {
-    background: #1A7FC1;
     border-radius: 18px;
     width: 100%;
     height: 3.5rem;
     margin-top: 1.4rem;
     border: none;
+}
+
+.cadastro-botao button:enabled {
+    background: #1A7FC1;
     cursor: pointer;
 }
 
-.cadastro-botao button:hover {
+.cadastro-botao button:enabled:hover {
     background: rgba(26, 127, 193, 0.7)
 }
 
@@ -96,6 +101,10 @@ input::placeholder {
     text-decoration: none;
 }
 
+.cadastro-botao :disabled {
+    background-color: rgba(0, 0, 0, 0.25);
+    cursor: standart;
+}
 
 
 .validation-error div {
