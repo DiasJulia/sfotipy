@@ -1,6 +1,6 @@
 [
     {
-        "id": 0,
+        "id": 1,
         "name": "Angel",
         "picture": "",
         "email": "angel@gmail.com",
@@ -10,21 +10,41 @@
         "playlists": []
     },
     {
-        "id": 0,
-        "name": "Angel_",
+        "id": 2,
+        "name": "Angel",
         "picture": "",
-        "email": "angel_@gmail.com",
+        "email": "angel__@gmail.com",
         "password": "1234",
         "followers": 0,
         "artist": false,
         "playlists": []
     },
     {
-        "id": 0,
-        "name": "Roberto",
+        "id": 3,
+        "name": "Angel",
         "picture": "",
-        "email": "robisvaldo@gmail.com",
+        "email": "angel___@gmail.com",
         "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 4,
+        "name": "Administrator",
+        "picture": "",
+        "email": "admin@gmail.com",
+        "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 5,
+        "name": "Dudinha",
+        "picture": "",
+        "email": "Duda_do_gerah@gmail.com",
+        "password": "12345678",
         "followers": 0,
         "artist": false,
         "playlists": []

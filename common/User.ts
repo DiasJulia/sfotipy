@@ -9,7 +9,7 @@ export class User {
     playlists?: [];
 
     constructor(user: Partial<User> = {}) {
-        this.id = user.id || 0;
+        this.id = user.id;
         this.name = user.name || '';
         this.picture = user.picture || '';
         this.email = user.email || '';

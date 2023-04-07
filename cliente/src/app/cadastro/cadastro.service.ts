@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
 
@@ -10,12 +10,13 @@ import { User } from '../../../../common/User';
 })
 export class RegisterService {
 
-    private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     private taUrl = 'http://localhost:3000';
+    private lastId = 0;
 
     constructor(private http: HttpClient) { }
 
     addUser(user: User) {
+        user.id = ++this.lastId;
         return this.http.post<User>(this.taUrl + "/usuarios", user);
     }
 
