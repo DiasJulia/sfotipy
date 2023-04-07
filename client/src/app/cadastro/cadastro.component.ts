@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../../../../common/User'
 //import { RegisterService } from './cadastro.service';
 import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
     private customValidator: CustomvalidationService,
     private registerService: UserService,
     private router: Router,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
@@ -76,8 +78,9 @@ export class RegisterComponent implements OnInit {
               dataServer => {
                 this.RegisterForm.reset();
                 setTimeout(() => {
-                  this.router.navigate(['login']);
+                  this.router.navigate(['']);
                 }, 1000);
+                this.loginService.updateLoginStatus(true);
               }
             )
           }

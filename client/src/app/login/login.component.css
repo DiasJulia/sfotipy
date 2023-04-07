@@ -295,6 +295,7 @@ input::placeholder {
     font-size: 40px;
     color: #E1E1E1;
     text-decoration: none;
+    margin-top: 2px;
 }
 
 .cadastro:hover {

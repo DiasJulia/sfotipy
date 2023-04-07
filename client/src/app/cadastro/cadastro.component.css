@@ -142,7 +142,7 @@ body {
     align-items: center;
 
     backdrop-filter: blur(2px);
-
+    flex-direction: column;
 }
 
 .imagem-logo {
@@ -155,7 +155,8 @@ body {
     display: flex;
     flex-direction: column;
     background: #86929B;
-    border-radius: 32px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
     align-items: center;
 }
 
@@ -272,4 +273,48 @@ input::placeholder {
     color: #FF3737;
     font-weight: 400;
     font-size: 20px;
+}
+
+.tela-redirec {
+    background-color: #E1E1E1;
+    width: 680px;
+    height: 3.5rem;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    vertical-align: center;
+}
+
+.tela-redirec div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-right: 2rem;
+    margin-top: 0.7rem;
+}
+
+.tela-redirec div p {
+    font-family: 'Itim', sans-serif;
+    font-size: 22px;
+}
+
+.tela-redirec div a {
+    font-family: 'Iceland', sans-serif;
+    text-decoration: none;
+    color: rgb(29, 162, 193);
+    border: 1px solid darkcyan;
+    width: 200px;
+    height: 30px;
+    border-radius: 8px;
+    font-size: 22px;
+}
+
+.login {
+    text-align: center;
+
+    margin-left: 1rem;
+}
+
+.login:hover {
+    color: lightblue;
+    background-color: rgba(127, 255, 212, 0.233);
 }
