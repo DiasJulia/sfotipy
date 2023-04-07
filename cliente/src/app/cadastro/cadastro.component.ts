@@ -3,6 +3,9 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { CustomvalidationService } from './Validators_extras';
 
+import { User } from '../../../../common/User'
+import { RegisterService } from './cadastro.service';
+
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
@@ -11,11 +14,12 @@ import { CustomvalidationService } from './Validators_extras';
 export class RegisterComponent implements OnInit {
 
   RegisterForm!: FormGroup;
-  submitted = false;
+  submitted!: false;
 
   constructor(
     private fb: FormBuilder,
-    private customValidator: CustomvalidationService
+    private customValidator: CustomvalidationService,
+    private registerService: RegisterService,
   ) { }
 
   ngOnInit(): void {
@@ -47,15 +51,26 @@ export class RegisterComponent implements OnInit {
     return this.RegisterForm.get('nome')!;
   }
 
-
-
   submit() {
-    if (this.RegisterForm.invalid) {
-      return;
+
+    let data = this.RegisterForm.value;
+
+
+    if (this.RegisterForm.valid) {
+      data = new User({
+        name: data.nome,
+        email: data.email,
+        password: data.senha
+      })
+      this.registerService.addUser(data).subscribe(
+        dataServer => {
+          console.log(dataServer)
+        }
+      )
+
     }
-
-    console.log("Enviou Formulario");
+    else {
+      console.log('envio não efetuado');
+    }
   }
-
 }
-

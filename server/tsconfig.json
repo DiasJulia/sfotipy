@@ -12,7 +12,7 @@
         ],
         "noImplicitAny": true,
         "outDir": "typeScript",
-        "ignoreDeprecations": "5.0"
+        "ignoreDeprecations": "5.0",
     },
     "compileOnSave": true,
 }

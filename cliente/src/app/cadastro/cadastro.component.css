@@ -129,7 +129,3 @@ input::placeholder {
     font-weight: 400;
     font-size: 20px;
 }
-
-.validation-error {
-    border-color: #FF3737;
-}
