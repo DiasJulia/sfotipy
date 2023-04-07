@@ -3,6 +3,8 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { CustomvalidationService } from './Validators_extras';
 
+import { Router } from '@angular/router';
+
 import { User } from '../../../../common/User'
 import { RegisterService } from './cadastro.service';
 
@@ -20,6 +22,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private customValidator: CustomvalidationService,
     private registerService: RegisterService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -65,13 +68,13 @@ export class RegisterComponent implements OnInit {
 
       this.registerService.emailExists(data.email).subscribe(
         emailExists => {
-          console.log(emailExists);
           if (emailExists) {
             this.email.setErrors({ 'emailExists': true });
           } else {
             this.registerService.addUser(data).subscribe(
               dataServer => {
-                console.log(dataServer)
+                this.router.navigate(['/login'], { state: { message: 'Usuário cadastrado com sucesso!' } });
+                //console.log(dataServer)
               }
             )
           }

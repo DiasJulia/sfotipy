@@ -7,6 +7,7 @@
     </div>
     <div class="input-group">
       <Form [formGroup]="LoginForm" (ngSubmit)="submit()" #formDir="ngForm">
+        <p class="message-confirmacao">{{ message }}</p>
         <div class="input-box">
           <label for="email" class="nomes-input">E-mail</label>
           <label for="email">

@@ -13,38 +13,8 @@
         "id": 2,
         "name": "Angel",
         "picture": "",
-        "email": "angel__@gmail.com",
+        "email": "angelwillyanfire@gmail.com",
         "password": "1234",
-        "followers": 0,
-        "artist": false,
-        "playlists": []
-    },
-    {
-        "id": 3,
-        "name": "Angel",
-        "picture": "",
-        "email": "angel___@gmail.com",
-        "password": "1234",
-        "followers": 0,
-        "artist": false,
-        "playlists": []
-    },
-    {
-        "id": 4,
-        "name": "Administrator",
-        "picture": "",
-        "email": "admin@gmail.com",
-        "password": "1234",
-        "followers": 0,
-        "artist": false,
-        "playlists": []
-    },
-    {
-        "id": 5,
-        "name": "Dudinha",
-        "picture": "",
-        "email": "Duda_do_gerah@gmail.com",
-        "password": "12345678",
         "followers": 0,
         "artist": false,
         "playlists": []

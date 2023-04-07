@@ -182,3 +182,10 @@ input::placeholder {
 .validation-error {
     border-color: #FF3737;
 }
+
+.menssage-confirmacao {
+    border-color: red;
+    left: 50%;
+    right: 50%;
+    font-size: 50px;
+}
