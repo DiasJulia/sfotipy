@@ -65,6 +65,32 @@ app.post('/usuarios', multipartMiddleware, (req, res) => {
   });
 });
 
+app.get('/usuarios', (req, res) => {
+  const filePath = './usuarios/user.json';
+
+  // Verifica se o arquivo existe
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to load user data.' });
+    } else {
+      // Lê o conteúdo do arquivo
+      const fileContent = fs.readFileSync(filePath);
+      const users = JSON.parse(fileContent.toString());
+
+      // Verifica se foi passado um email na consulta
+      const email = req.query.email;
+      if (email) {
+        // Filtra o array de usuários pelo email
+        const filteredUsers = users.filter((user: { email: string; }) => user.email === email as string);
+        res.json(filteredUsers);
+      } else {
+        // Retorna todos os usuários
+        res.json(users);
+      }
+    }
+  });
+});
 
 app.use((err: { message: any; }, req: any, res: { json: (arg0: { error: any; }) => void; }, next: any) => res.json({ error: err.message }))
 

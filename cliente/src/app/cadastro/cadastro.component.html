@@ -22,6 +22,9 @@
             <div *ngIf="email.touched && email.errors?.['email']"><img src="../../assets/erro_input.svg">
               <p>Email inválido!</p>
             </div>
+            <div *ngIf="email.errors?.['emailExists']"><img src="../../assets/erro_input.svg">
+              <p>Este endereço de e-mail já está em uso</p>
+            </div>
           </div>
         </div>
 

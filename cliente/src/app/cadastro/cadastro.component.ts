@@ -62,14 +62,23 @@ export class RegisterComponent implements OnInit {
         email: data.email,
         password: data.senha
       })
-      this.registerService.addUser(data).subscribe(
-        dataServer => {
-          console.log(dataServer)
+
+      this.registerService.emailExists(data.email).subscribe(
+        emailExists => {
+          console.log(emailExists);
+          if (emailExists) {
+            this.email.setErrors({ 'emailExists': true });
+          } else {
+            this.registerService.addUser(data).subscribe(
+              dataServer => {
+                console.log(dataServer)
+              }
+            )
+          }
         }
       )
 
-    }
-    else {
+    } else {
       console.log('envio não efetuado');
     }
   }
