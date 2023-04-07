@@ -6,6 +6,7 @@ export class User {
     password?: string;
     followers?: number;
     artist?: boolean;
+    //playlists?: Playlist[];
     playlists?: [];
 
     constructor(user: Partial<User> = {}) {

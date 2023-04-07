@@ -6,7 +6,8 @@ import { CustomvalidationService } from './Validators_extras';
 import { Router } from '@angular/router';
 
 import { User } from '../../../../common/User'
-import { RegisterService } from './cadastro.service';
+//import { RegisterService } from './cadastro.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private customValidator: CustomvalidationService,
-    private registerService: RegisterService,
+    private registerService: UserService,
     private router: Router,
   ) { }
 
