@@ -1,0 +1,32 @@
+[
+    {
+        "id": 0,
+        "name": "Angel",
+        "picture": "",
+        "email": "angel@gmail.com",
+        "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 0,
+        "name": "Angel_",
+        "picture": "",
+        "email": "angel_@gmail.com",
+        "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 0,
+        "name": "Roberto",
+        "picture": "",
+        "email": "robisvaldo@gmail.com",
+        "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    }
+]

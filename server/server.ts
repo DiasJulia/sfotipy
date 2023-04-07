@@ -1,5 +1,6 @@
 import express = require('express');
 import bodyParser = require("body-parser");
+import fs = require('fs');
 //import { PlaylistService } from './src/playlist-service';
 
 //import { MusicService } from './src/music-service';
@@ -36,8 +37,33 @@ const multipartMiddleware = multipart({ uploadDir: './usuarios' });
 app.post('/usuarios', multipartMiddleware, (req, res) => {
   const files = req.body;
   console.log(files)
-  res.json({ message: files })
-})
+  //const userJson = JSON.stringify(files);
+  const filePath = './usuarios/user.json';
+
+  // Verifica se o arquivo já existe
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    let users = [];
+
+    // Se o arquivo já existe, lê o conteúdo e adiciona ao array
+    if (!err) {
+      const fileContent = fs.readFileSync(filePath);
+      users = JSON.parse(fileContent.toString());
+    }
+
+    // Adiciona o novo usuário ao array
+    users.push(files);
+
+    // Grava o array de usuários no arquivo
+    fs.writeFile(filePath, JSON.stringify(users), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to save user data.' });
+      } else {
+        res.json({ message: 'User data saved.' });
+      }
+    });
+  });
+});
 
 
 app.use((err: { message: any; }, req: any, res: { json: (arg0: { error: any; }) => void; }, next: any) => res.json({ error: err.message }))
