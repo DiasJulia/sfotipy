@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   message: string = '';
-  LoginForm!: FormGroup
+  LoginForm!: FormGroup;
   submitted = false;
 
   constructor(
@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.message = this.router.getCurrentNavigation()?.extras?.state?.['message'] || '';
-    console.log('Mensagem recebida: ', this.message);
+    //console.log('Mensagem recebida: ', this.message);
     this.LoginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
@@ -40,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
+    this.submitted = true;
     if (this.LoginForm.invalid) {
       return;
     }

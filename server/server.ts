@@ -1,18 +1,10 @@
 import express = require('express');
 import bodyParser = require("body-parser");
 import fs = require('fs');
-//import { PlaylistService } from './src/playlist-service';
-
-//import { MusicService } from './src/music-service';
-import { Music } from '../common/music';
-import { Playlist } from '../common/playlist';
-
-const app = express();
 const cors = require('cors');
 const multipart = require('connect-multiparty')
 
-//var musicService: MusicService = new MusicService();
-//var playlistService = new PlaylistService();
+const app = express();
 
 var allowCrossDomain = function (req: any, res: any, next: any) {
   res.header('Access-Control-Allow-Origin', "*");

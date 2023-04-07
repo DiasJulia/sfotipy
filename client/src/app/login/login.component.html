@@ -7,8 +7,7 @@
     </div>
     <div class="input-group">
       <Form [formGroup]="LoginForm" (ngSubmit)="submit()" #formDir="ngForm">
-        <p class="message-confirmacao">{{ message }}</p>
-        <div class="input-box">
+        <div class="input-box email">
           <label for="email" class="nomes-input">E-mail</label>
           <label for="email">
             <img src="../../assets/email_branco.svg" class="icones" id="email-i" alt="icone de email">
@@ -38,8 +37,6 @@
             </div>
           </div>
         </div>
-
-        <a routerLink="/esqueci_senha" class="esqueceu-senha">Esqueceu sua senha?</a>
         <div class="entrar-botao"><button type="submit">Entrar</button>
         </div>
       </Form>

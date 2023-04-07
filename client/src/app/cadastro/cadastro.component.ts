@@ -73,8 +73,10 @@ export class RegisterComponent implements OnInit {
           } else {
             this.registerService.addUser(data).subscribe(
               dataServer => {
-                this.router.navigate(['/login'], { state: { message: 'Usuário cadastrado com sucesso!' } });
-                //console.log(dataServer)
+                this.RegisterForm.reset();
+                setTimeout(() => {
+                  this.router.navigate(['login']);
+                }, 1000);
               }
             )
           }
