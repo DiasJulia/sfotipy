@@ -20,12 +20,24 @@ export class UserService implements OnInit {
         })
     };
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        this.getTamanho().subscribe(tamanho => {
+            this.lastId = tamanho;
+            console.log(this.lastId);
+        });
+    }
 
     ngOnInit() {
         this.getTamanho().subscribe(tamanho => {
             this.lastId = tamanho;
+            console.log(this.lastId);
         });
+    }
+
+    getTamanho(): Observable<number> {
+        return this.http.get<any>(`${this.appURL}/usuarios`).pipe(
+            map((users: any) => users.length)
+        );
     }
 
     getUserById(userId: number): Observable<User> {
@@ -35,14 +47,8 @@ export class UserService implements OnInit {
             );
     }
 
-    getTamanho(): Observable<number> {
-        return this.http.get<User[]>(`${this.appURL}/usuarios`).pipe(
-            map((users: User[]) => users.length)
-        );
-    }
-
     addUser(user: User) {
-        user.id = ++this.lastId;
+        user.id = this.lastId + 1;
         return this.http.post<User>(this.appURL + "/usuarios", user);
     }
 

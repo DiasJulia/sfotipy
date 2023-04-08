@@ -76,7 +76,6 @@ export class RegisterComponent implements OnInit {
           } else {
             this.registerService.addUser(data).subscribe(
               dataServer => {
-                this.RegisterForm.reset();
                 setTimeout(() => {
                   this.router.navigate(['']);
                 }, 1000);

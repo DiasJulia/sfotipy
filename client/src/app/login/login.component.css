@@ -232,10 +232,10 @@ input::placeholder {
 .icones {
     width: 3rem;
     height: 3rem;
-    position: absolute;
+    position: fixed;
     margin-top: 3rem;
-    left: 43rem;
-
+    right: 68rem;
+    /*RESOLVER DPS*/
     color: rgba(255, 255, 255, 0.6)
 }
 
