@@ -48,29 +48,28 @@ export class LoginComponent implements OnInit {
       return;
     }
     else {
-      this.loginService.login(this.LoginForm.value).subscribe(
+      const email = this.email.value
+      const password = this.senha.value
+
+      this.loginService.login(email, password).subscribe(
         dataServer => {
-          if (dataServer.length > 0) {
-            if (this.senha.value == dataServer[0].password) {
-              if (dataServer[0] && dataServer[0].id) {
-                alert('logado com sucesso ');
-                //this.userService.setUserId(dataServer[0].id);
-                this.loginService.updateLoginStatus(true);
-                this.router.navigate(['']);
-              }
-            } else {
-              this.LoginForm.reset();
-              alert('usuario ou senha invalidos!')
-            }
-          } else {
+          console.log(dataServer);
+          if (dataServer.success) {
+            alert('logado com sucesso! ');
+            console.log(dataServer);
+            this.userService.setUserId(dataServer.id);
+            this.loginService.updateLoginStatus(true);
+            //this.router.navigate(['']);
+          }
+          else {
             this.LoginForm.reset();
-            alert('usuario ou senha invalidos!')
+            alert('Usuários ou senha inválidos! ')
           }
         }
       );
     }
-
   }
+
 
 
 }

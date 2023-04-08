@@ -12,8 +12,8 @@ export class LoginService {
 
     constructor(private http: HttpClient) { }
 
-    login(values: { email: string, password: string }) {
-        return this.http.get<User[]>(`${this.appURL}/users?email=${values.email}`)
+    login(email: string, password: string) {
+        return this.http.post<any>(`${this.appURL}/login`, { email, password });
     }
 
     getLoginStatus() {

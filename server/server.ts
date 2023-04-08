@@ -1,6 +1,7 @@
 import express = require('express');
 import bodyParser = require("body-parser");
 import fs = require('fs');
+import { User } from '../common/user';
 const cors = require('cors');
 const multipart = require('connect-multiparty')
 
@@ -26,10 +27,9 @@ app.use(cors(corsOptions));
 
 const multipartMiddleware = multipart({ uploadDir: './usuarios' });
 
-app.post('/users', multipartMiddleware, (req, res) => {
+app.post('/users', multipartMiddleware, (req, res) => { //Cadastro
   const files = req.body;
   console.log(files)
-  //const userJson = JSON.stringify(files);
   const filePath = './usuarios/user.json';
 
   // Verifica se o arquivo já existe
@@ -57,7 +57,24 @@ app.post('/users', multipartMiddleware, (req, res) => {
   });
 });
 
-app.get('/users', (req, res) => {
+app.post('/login', (req, res) => { // Login
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Ler o arquivo com os usuários do banco de dados
+  const usersData = fs.readFileSync('usuarios/user.json', 'utf8');
+  const users = JSON.parse(usersData);
+  // Verificar se o usuário (email e senha) existe no banco de dados
+  const user = users.find((u: User) => u.email === email && u.password === password);
+
+  if (user) {
+    res.json({ success: true, id: user.id }); // Retorna uma mensagem de sucesso e o id do usuário logado
+  } else {
+    res.json({ success: false }); //Retorna uma mensagem de false porque não achou o usuário no banco de dados
+  }
+});
+
+app.get('/users', (req, res) => { // Usuarios aparecendo no localhost:3000/users
   const filePath = './usuarios/user.json';
 
   // Verifica se o arquivo existe
@@ -84,7 +101,7 @@ app.get('/users', (req, res) => {
   });
 });
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id', (req, res) => { // localhost:3000/users/1 retorna todos os dados do usuário 1 e assim sucessivamente
   const userId = parseInt(req.params.id); // converte o parâmetro da rota para um número inteiro
   const filePath = './usuarios/user.json';
 

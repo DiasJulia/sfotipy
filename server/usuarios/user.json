@@ -1,1 +1,72 @@
-[{"id":1,"name":"Angel","picture":"","email":"angel@gmail.com","password":"1234","followers":0,"artist":false,"playlists":[]},{"id":2,"name":"Angel","picture":"","email":"angela@gmail.com","password":"1234","followers":0,"artist":false,"playlists":[]},{"id":3,"name":"Dudinha","picture":"","email":"dudinha_do_gerah@gmail.com","password":"12345678","followers":0,"artist":false,"playlists":[]},{"id":4,"name":"Julinha","picture":"","email":"Julia_do_passinho@gmail.com","password":"12345678","followers":0,"artist":false,"playlists":[]},{"id":5,"name":"Matheuszin","picture":"","email":"matheus@gmail.com","password":"12345678","followers":0,"artist":false,"playlists":[]},{"id":6,"name":"Erivald","picture":"","email":"erivaldoomago@hotmail.com","password":"12345678","followers":0,"artist":false,"playlists":[]},{"id":7,"name":"Angel","picture":"","email":"angeasghasgl@gmail.com","password":"1234","followers":0,"artist":false,"playlists":[]}]
+[
+    {
+        "id": 1,
+        "name": "Angel",
+        "picture": "",
+        "email": "angel@gmail.com",
+        "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 2,
+        "name": "Angel",
+        "picture": "",
+        "email": "angela@gmail.com",
+        "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 3,
+        "name": "Dudinha",
+        "picture": "",
+        "email": "dudinha_do_gerah@gmail.com",
+        "password": "12345678",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 4,
+        "name": "Julinha",
+        "picture": "",
+        "email": "Julia_do_passinho@gmail.com",
+        "password": "12345678",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 5,
+        "name": "Matheuszin",
+        "picture": "",
+        "email": "matheus@gmail.com",
+        "password": "12345678",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 6,
+        "name": "Erivald",
+        "picture": "",
+        "email": "erivaldoomago@hotmail.com",
+        "password": "12345678",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    },
+    {
+        "id": 7,
+        "name": "Angel",
+        "picture": "",
+        "email": "angeasghasgl@gmail.com",
+        "password": "1234",
+        "followers": 0,
+        "artist": false,
+        "playlists": []
+    }
+]
