@@ -84,6 +84,31 @@ app.get('/users', (req, res) => {
   });
 });
 
+app.get('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id); // converte o parâmetro da rota para um número inteiro
+  const filePath = './usuarios/user.json';
+
+  // Lê o arquivo JSON de usuários
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to read user data.' });
+      return;
+    }
+
+    const users = JSON.parse(data.toString());
+
+    // Procura o usuário com o ID correspondente
+    const user = users.find((u: { id: number }) => u.id === userId);
+
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ error: 'User not found.' });
+    }
+  });
+});
+
 app.use((err: { message: any; }, req: any, res: { json: (arg0: { error: any; }) => void; }, next: any) => res.json({ error: err.message }))
 
 
