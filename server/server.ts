@@ -26,7 +26,7 @@ app.use(cors(corsOptions));
 
 const multipartMiddleware = multipart({ uploadDir: './usuarios' });
 
-app.post('/usuarios', multipartMiddleware, (req, res) => {
+app.post('/users', multipartMiddleware, (req, res) => {
   const files = req.body;
   console.log(files)
   //const userJson = JSON.stringify(files);
@@ -57,14 +57,14 @@ app.post('/usuarios', multipartMiddleware, (req, res) => {
   });
 });
 
-app.get('/usuarios', (req, res) => {
+app.get('/users', (req, res) => {
   const filePath = './usuarios/user.json';
 
   // Verifica se o arquivo existe
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {
       console.error(err);
-      res.status(500).json({ error: 'Failed to load user data.' });
+      res.status(500).json({ error: 'Falha ao carregar dados do usuário.' });
     } else {
       // Lê o conteúdo do arquivo
       const fileContent = fs.readFileSync(filePath);

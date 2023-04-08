@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
           } else {
             this.registerService.addUser(data).subscribe(
               dataServer => {
-                this.registerService.setUserId(dataServer.id);
+                //this.registerService.setUserId(dataServer.id);
                 this.loginService.updateLoginStatus(true);
                 this.RegisterForm.reset();
                 setTimeout(() => {

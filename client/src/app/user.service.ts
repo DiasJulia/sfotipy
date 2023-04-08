@@ -40,7 +40,7 @@ export class UserService implements OnInit {
     }
 
     getTamanho(): Observable<number> {
-        return this.http.get<any>(`${this.appURL}/usuarios`).pipe(
+        return this.http.get<any>(`${this.appURL}/users`).pipe(
             map((users: any) => users.length)
         );
     }
@@ -54,11 +54,11 @@ export class UserService implements OnInit {
 
     addUser(user: User) {
         user.id = this.lastId + 1;
-        return this.http.post<User>(this.appURL + "/usuarios", user);
+        return this.http.post<User>(this.appURL + "/users", user);
     }
 
     emailExists(email: string): Observable<boolean> {
-        return this.http.get<any[]>(`${this.appURL}/usuarios?email=${email}`).pipe(
+        return this.http.get<any[]>(`${this.appURL}/users?email=${email}`).pipe(
             map((users: any[]) => users.length > 0)
         );
     }

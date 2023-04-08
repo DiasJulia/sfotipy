@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
             if (this.senha.value == dataServer[0].password) {
               if (dataServer[0] && dataServer[0].id) {
                 alert('logado com sucesso ');
-                this.userService.setUserId(dataServer[0].id);
+                //this.userService.setUserId(dataServer[0].id);
                 this.loginService.updateLoginStatus(true);
                 this.router.navigate(['']);
               }

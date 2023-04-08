@@ -13,7 +13,7 @@ export class LoginService {
     constructor(private http: HttpClient) { }
 
     login(values: { email: string, password: string }) {
-        return this.http.get<User[]>(`${this.appURL}/usuarios?email=${values.email}`)
+        return this.http.get<User[]>(`${this.appURL}/users?email=${values.email}`)
     }
 
     getLoginStatus() {
