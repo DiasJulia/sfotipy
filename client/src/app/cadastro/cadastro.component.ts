@@ -29,6 +29,7 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.redirectToHomePage();
     this.RegisterForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]],
@@ -40,6 +41,15 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+
+  redirectToHomePage() {
+    this.loginService.getLoginStatus().subscribe(isLogged => { //Função que verifica se o usuário está logado. Caso sim, não faz sentido as telas de Login e cadastro
+      if (isLogged) {
+        this.router.navigate(['']); // Redireciona o usuário para a tela principal caso ele esteja logado
+      }
+    });
+  }
+
   get registerFormControl() {
     return this.RegisterForm.controls;
   }
