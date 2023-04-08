@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private loginService: LoginService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
@@ -43,8 +47,29 @@ export class LoginComponent implements OnInit {
     if (this.LoginForm.invalid) {
       return;
     }
+    else {
+      this.loginService.login(this.LoginForm.value).subscribe(
+        dataServer => {
+          if (dataServer.length > 0) {
+            if (this.senha.value == dataServer[0].password) {
+              if (dataServer[0] && dataServer[0].id) {
+                alert('logado com sucesso ');
+                this.userService.setUserId(dataServer[0].id);
+                this.loginService.updateLoginStatus(true);
+                this.router.navigate(['']);
+              }
+            } else {
+              this.LoginForm.reset();
+              alert('usuario ou senha invalidos!')
+            }
+          } else {
+            this.LoginForm.reset();
+            alert('usuario ou senha invalidos!')
+          }
+        }
+      );
+    }
 
-    console.log("Enviou Formulario");
   }
 
 

@@ -19,12 +19,17 @@ export class UserService implements OnInit {
             'Content-Type': 'application/json'
         })
     };
+    userId: any;
 
     constructor(private http: HttpClient) {
         this.getTamanho().subscribe(tamanho => {
             this.lastId = tamanho;
             console.log(this.lastId);
         });
+    }
+
+    setUserId(id: number): void {
+        this.userId.next(id);
     }
 
     ngOnInit() {

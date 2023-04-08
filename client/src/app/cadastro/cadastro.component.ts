@@ -76,10 +76,12 @@ export class RegisterComponent implements OnInit {
           } else {
             this.registerService.addUser(data).subscribe(
               dataServer => {
-                setTimeout(() => {
-                  this.router.navigate(['']);
-                }, 1000);
+                this.registerService.setUserId(dataServer.id);
                 this.loginService.updateLoginStatus(true);
+                this.RegisterForm.reset();
+                setTimeout(() => {
+                }, 1000);
+                this.router.navigate(['']);
               }
             )
           }

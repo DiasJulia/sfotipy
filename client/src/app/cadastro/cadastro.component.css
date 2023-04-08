@@ -286,7 +286,7 @@ input::placeholder {
 
 .tela-redirec div {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     margin-right: 2rem;
     margin-top: 0.7rem;
