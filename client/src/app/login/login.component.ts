@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   message: string = '';
   LoginForm!: FormGroup;
   submitted = false;
+  erro_servidor: any;
 
   constructor(
     private fb: FormBuilder,
@@ -48,28 +49,28 @@ export class LoginComponent implements OnInit {
       return;
     }
     else {
-      const email = this.email.value
-      const password = this.senha.value
+      const email = String(this.email.value).toLowerCase();
+      const password = this.senha.value;
 
       this.loginService.login(email, password).subscribe(
         dataServer => {
           console.log(dataServer);
           if (dataServer.success) {
-            alert('logado com sucesso! ');
-            console.log(dataServer);
+            this.erro_servidor = true;
             this.userService.setUserId(dataServer.id);
             this.loginService.updateLoginStatus(true);
-            //this.router.navigate(['']);
+            this.router.navigate(['']);
           }
           else {
+            this.erro_servidor = false;
             this.LoginForm.reset();
-            alert('Usuários ou senha inválidos! ')
+            setTimeout(() => {
+              location.reload()
+            }, 1500);
           }
         }
       );
     }
   }
-
-
 
 }

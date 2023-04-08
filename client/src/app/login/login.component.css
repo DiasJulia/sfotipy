@@ -302,7 +302,7 @@ input::placeholder {
     text-decoration: underline;
 }
 
-.validation-error div {
+.validation-error .div-fantastica {
     display: flex;
     align-items: center;
 
@@ -310,14 +310,14 @@ input::placeholder {
     margin-bottom: 0.3rem;
 }
 
-.validation-error div img {
+.validation-error .div-fantastica img {
     width: 2rem;
     height: 2rem;
     padding-right: 0.5rem;
     padding-left: 0.2rem;
 }
 
-.validation-error div p {
+.validation-error .div-fantastica p {
     font-family: 'Aldrich', sans-serif;
     font-style: normal;
     color: #FF3737;
@@ -334,4 +334,8 @@ input::placeholder {
     left: 50%;
     right: 50%;
     font-size: 50px;
+}
+
+.incorretos {
+    font-size: 28px;
 }

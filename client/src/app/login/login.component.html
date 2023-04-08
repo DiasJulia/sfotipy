@@ -14,11 +14,15 @@
           </label>
           <input id="email" type="email" name="email" placeholder="exemplo@gmail.com" formControlName="email">
           <div class="validation-error">
-            <div *ngIf="(email.touched || submitted) && email.errors?.['required']"><img
-                src="../../assets/erro_input.svg">
-              <p>O email é obrigatório!</p>
+            <div *ngIf="(erro_servidor === false)" class="div-fantastica"><img src="../../assets/erro_input.svg">
+              <p class="incorretos">E-mail ou senha incorretos!</p>
             </div>
-            <div *ngIf="email.touched && email.errors?.['email']"><img src="../../assets/erro_input.svg">
+            <div *ngIf="(submitted) && email.errors?.['required'] && !(erro_servidor === false)" class="div-fantastica">
+              <img src="../../assets/erro_input.svg">
+              <p>Um email precisa ser inserido!</p>
+            </div>
+            <div *ngIf="email.touched && email.errors?.['email']" class="div-fantastica"><img
+                src="../../assets/erro_input.svg">
               <p>Email inválido!</p>
             </div>
           </div>
@@ -31,8 +35,8 @@
           </label>
           <input id="password" type="password" name="password" placeholder="••••••••" formControlName="senha">
           <div class="validation-error">
-            <div *ngIf="(senha.touched || submitted) && senha.errors?.['required']"><img
-                src="../../assets/erro_input.svg">
+            <div *ngIf="(submitted) && senha.errors?.['required'] && !(erro_servidor ===false)" class="div-fantastica">
+              <img src="../../assets/erro_input.svg">
               <p> A senha precisa ser inserida!</p>
             </div>
           </div>

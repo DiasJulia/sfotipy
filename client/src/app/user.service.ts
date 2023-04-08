@@ -24,7 +24,6 @@ export class UserService implements OnInit {
     constructor(private http: HttpClient) {
         this.getTamanho().subscribe(tamanho => {
             this.lastId = tamanho;
-            console.log(this.lastId);
         });
     }
 
@@ -35,7 +34,6 @@ export class UserService implements OnInit {
     ngOnInit() {
         this.getTamanho().subscribe(tamanho => {
             this.lastId = tamanho;
-            console.log(this.lastId);
         });
     }
 
