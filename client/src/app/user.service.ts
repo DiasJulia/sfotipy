@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { retry, map } from 'rxjs/operators';
 import { User } from '../../../common/User';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -10,21 +10,23 @@ import { Observable } from 'rxjs';
 export class UserService implements OnInit {
     private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     private appURL = 'http://localhost:3000';
-    private playlistCategories: string[] = [];
-    private allCategories: string[] = [];
     private lastId = 0;
+    private userId = new BehaviorSubject<number>(0);
 
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json'
         })
     };
-    userId: any;
 
     constructor(private http: HttpClient) {
         this.getTamanho().subscribe(tamanho => {
             this.lastId = tamanho;
         });
+    }
+
+    getUserId(): Observable<number> {
+        return this.userId.asObservable()
     }
 
     setUserId(id: number): void {
@@ -44,7 +46,7 @@ export class UserService implements OnInit {
     }
 
     getUserById(userId: number): Observable<User> {
-        return this.http.get<User>(this.appURL + "/users/${userId}")
+        return this.http.get<User>(this.appURL + "/users/" + userId.toString())
             .pipe(
                 retry(2)
             );
