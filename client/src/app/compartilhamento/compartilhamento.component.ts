@@ -17,6 +17,7 @@ export class CompartilhamentoComponent {
 
   copyLink() {
     this.clipboard.copy(this.pageLink);
+    alert("Link copiado para a área de transferência!");
   }
 
   ngOnInit() {

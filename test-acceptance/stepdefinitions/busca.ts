@@ -1,5 +1,5 @@
 import { defineSupportCode } from 'cucumber';
-import { browser, $, element, ElementArrayFinder, by } from 'protractor';
+import { browser, $, element, ElementArrayFinder, by, protractor } from 'protractor';
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
 
@@ -42,7 +42,8 @@ defineSupportCode(function ({ Given, When, Then }) {
     Given(/^todas as músicas estão visíveis$/, async () => {
         await browser.refresh();
         var isCollapsed = element(by.css('.see-more-music'));
-        await isCollapsed.click();
+        const button = element(by.css('.see-more-music'));
+        await browser.executeScript('arguments[0].click()', button.getWebElement());
         await assertIncludesInName(isCollapsed, "menos");
     })
 
@@ -142,12 +143,20 @@ defineSupportCode(function ({ Given, When, Then }) {
         });
 
     Then(/^só serão mostradas músicas da categoria “([^\"]*)”$/,
-        async (category) => {
-            await element.all(by.css(`[name='music-card'] .category`)).then(async items => {
-                for (let index = 0; index < items.length; index++) {
-                    const element = items[index];
-                    await assertIncludesInName(items[index], category);
-                }
+        async (category: any) => {
+            await element.all(by.css("[name='music-category']")).map(function (elm) {
+                return elm.getText();
+            }).then(texts => {
+                texts.forEach((e: any) => expect(e.toLowerCase()).to.includes(category.toLowerCase()));
+            });
+        })
+
+    Then(/^só serão mostradas playlists da categoria “([^\"]*)”$/,
+        async (category: any) => {
+            await element.all(by.name("playlist-category-list")).map(function (elm) {
+                return elm.getText();
+            }).then(texts => {
+                texts.forEach((e: any) => expect(e.toLowerCase()).to.includes(category.toLowerCase()));
             });
         })
 })

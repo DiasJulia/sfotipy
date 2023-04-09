@@ -1,13 +1,13 @@
 .footer-container {
     position: fixed;
     width: 100vw;
-    height: 104px;
+    height: 112px;
     background: #6E7C88;
     bottom: 0;
     right: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     flex-direction: column;
 }
 
@@ -21,13 +21,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80%;
+    height: 65%;
 }
 
 .player-content {
+    margin: 0 10px;
+}
+
+.time-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 20%;
     padding-top: 5px;
     padding-bottom: 10px;
+}
+
+.time-content p {
+    margin: auto 5px;
+    font-family: 'Iceland';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
 }
 
 .progress-bar {
@@ -40,6 +55,8 @@
     position: relative;
     display: block;
     padding: 2px;
+
+    cursor: pointer;
 }
 
 .progress-bar>span {
@@ -50,4 +67,17 @@
 
     display: block;
     text-indent: -9999px;
+}
+
+i {
+    cursor: pointer;
+}
+
+.music-name {
+    font-family: 'Iceland';
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 28px;
+    color: #0D2538;
+    margin: 0;
 }

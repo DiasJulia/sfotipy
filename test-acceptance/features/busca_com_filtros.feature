@@ -7,6 +7,7 @@ Scenario: Busca com Filtro por categoria
 Given eu estou na página "Busca"
 When eu selecionar a categoria “POP” no filtro de busca por categorias
 Then só serão mostradas músicas da categoria “POP”
+And só serão mostradas playlists da categoria “POP”
 
 Scenario: Busca com Filtro por trecho do nome sem correspondências em playlists e com correspondências em músicas
 Given eu estou na página "Busca"

@@ -1,20 +1,28 @@
 <div class="container">
     <div class="title"> Playlists Em Alta</div>
     <div class="box">
-        <div >
-            <a href="https://www.youtube.com/"><div class="bigRectangle"></div></a>
+        <div>
+            <a href={{getFirstPlaylistLink()}}>
+                <div class="bigRectangle">{{getFirstPlaylistTitle()}}</div>
+            </a>
             <img src="assets/numberOne.png" alt="Número um" class="circle">
         </div>
-        <div >
-            <a href="https://www.youtube.com/"><div class="rectangle"></div></a>
+        <div>
+            <a href={{getSecondPlaylistLink()}}>
+                <div class="rectangle">{{getSecondPlaylistTitle()}}</div>
+            </a>
             <img src="assets/numberTwo.png" alt="Número dois" class="circleTwo">
         </div>
-        <div >
-            <a href="https://www.youtube.com/"><div class="rectangle"></div></a>
+        <div>
+            <a href={{getThirdPlaylistLink()}}>
+                <div class="rectangle">{{getThirdPlaylistTitle()}}</div>
+            </a>
             <img src="assets/numberThree.png" alt="Número três" class="circleThree">
         </div>
-        <div >
-            <a href="https://www.youtube.com/"><div class="rectangle"></div></a>
+        <div>
+            <a href={{getFourthPlaylistLink()}}>
+                <div class="rectangle">{{getFourthPlaylistTitle()}}</div>
+            </a>
             <img src="assets/numberFour.png" alt="Número quatro" class="circleFour">
         </div>
 

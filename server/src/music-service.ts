@@ -63,6 +63,6 @@ export class MusicService {
   }
 
   getById(musicId: number): Music | undefined {
-    return this.musics.find(({ id }) => id == musicId);
+    return this.musics.find(({id}) => id === musicId);
   }
 }

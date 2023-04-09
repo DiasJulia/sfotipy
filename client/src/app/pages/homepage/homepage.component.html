@@ -1,6 +1,6 @@
 <div class="homepage">
     <div class="plsts-em-alta">
-        <h1>Playlists em alta</h1>
+        <h1 name="plsts-em-alta">Playlists em alta</h1>
 
         <div class="plsts-ea-lst">
             <a class="plst-ea-4" [routerLink]="'/playlist/' + playlistsTrending[3].id.toString()">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="plsts-publicas">
-        <h1>Playlists Públicas</h1>
+        <h1 name="plsts-publicas">Playlists Públicas</h1>
 
         <div class="plsts-pb-lst">
             <div class="" *ngFor="let plst of playlistsPublic | slice:0:5">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="recomendacoes" *ngIf="isLogged">
-        <h1>Recomendações para você</h1>
+        <h1 name="recomendacoes">Recomendações para você</h1>
         
         <div class="plsts-rc-lst">
             <div class="" *ngFor="let plst of playlistsRecommended | slice:0:5">
@@ -53,7 +53,7 @@
     </div>
 
     <div class="minhas-plsts" *ngIf="isLogged">
-        <h1>Minhas Playlists</h1>
+        <h1 name="minhas-plsts">Minhas Playlists</h1>
 
         <div class="plsts-mp-lst">
             <div class="" *ngFor="let plst of playlistsUser | slice:0:5">

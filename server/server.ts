@@ -8,7 +8,6 @@ import fs = require('fs');
 import { Music } from '../common/music';
 import { Playlist } from '../common/playlist';
 import { Category } from '../common/category';
-import { Usera } from '../common/usera';
 
 const app = express();
 const cors = require('cors');
@@ -30,119 +29,9 @@ app.use(allowCrossDomain);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
-
-
-// ROTAS DE LOGIN //
-const multipartMiddleware = multipart({ uploadDir: './usuarios' });
-
-app.post('/users', multipartMiddleware, (req, res) => { //Cadastro
-  const files = req.body;
-  //  console.log(files)  <== Para demonstrar os arquivos cadastrados
-  const filePath = './usuarios/user.json';
-
-  // Verifica se o arquivo já existe
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    let users = [];
-
-    // Se o arquivo já existe, lê o conteúdo e adiciona ao array
-    if (!err) {
-      const fileContent = fs.readFileSync(filePath);
-      users = JSON.parse(fileContent.toString());
-    }
-
-    // Adiciona o novo usuário ao array
-    users.push(files);
-
-    // Grava o array de usuários no arquivo
-    fs.writeFile(filePath, JSON.stringify(users), (err) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to save user data.' });
-      } else {
-        delete files.password;
-        res.json(files);
-      }
-    });
-  });
-});
-
-app.post('/login', (req, res) => { // Login
-  const email = req.body.email;
-  const password = req.body.password;
-
-  // Ler o arquivo com os usuários do banco de dados
-  const usersData = fs.readFileSync('usuarios/user.json', 'utf8');
-  const users = JSON.parse(usersData);
-  // Verificar se o usuário (email e senha) existe no banco de dados
-  const user = users.find((u: Usera) => u.email === email && u.password === password);
-
-  if (user) {
-    res.json({ success: true, id: user.id }); // Retorna uma mensagem de sucesso e o id do usuário logado
-  } else {
-    res.json({ success: false }); //Retorna uma mensagem de false porque não achou o usuário no banco de dados
-  }
-});
-
-app.get('/users', (req, res) => { // Usuarios aparecendo no localhost:3000/users
-  const filePath = './usuarios/user.json';
-
-  // Verifica se o arquivo existe
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Falha ao carregar dados do usuário.' });
-    } else {
-      // Lê o conteúdo do arquivo
-      const fileContent = fs.readFileSync(filePath);
-      const users = JSON.parse(fileContent.toString());
-
-      // Verifica se foi passado um email na consulta
-      const email = req.query.email;
-      if (email) {
-        // Filtra o array de usuários pelo email
-        const filteredUsers = users.filter((user: { email: string; }) => user.email === email as string);
-        res.json(filteredUsers);
-      } else {
-        // Retorna todos os usuários
-        res.json(users);
-      }
-    }
-  });
-});
-
-app.get('/users/:id', (req, res) => { // localhost:3000/users/1 retorna todos os dados do usuário 1 e assim sucessivamente
-  const userId = parseInt(req.params.id); // converte o parâmetro da rota para um número inteiro
-  const filePath = './usuarios/user.json';
-
-  // Lê o arquivo JSON de usuários
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to read user data.' });
-      return;
-    }
-
-    const users = JSON.parse(data.toString());
-
-    // Procura o usuário com o ID correspondente
-    const user = users.find((u: { id: number }) => u.id === userId);
-
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404).json({ error: 'User not found.' });
-    }
-  });
-});
-
-
 
 //ROTAS DE MUSICAS
+
 
 app.post('/criar_playlist', (req: express.Request, res: express.Response) => {
   const newPlaylist = <Playlist>req.body;
@@ -156,15 +45,6 @@ app.post('/criar_playlist', (req: express.Request, res: express.Response) => {
   } catch (error) {
     return res.status(500).send({ message: 'Erro interno do servidor.' });
   }
-});
-
-
-app.get('/minhas_playlists', (req, res) => {
-  //const ownerId = parseInt(req.query.ownerId as string);
-  const ownerId = 1
-  console.log(ownerId) // busca o ownerId a partir dos parâmetros da requisição
-  const userPlaylists = playlistService.getUserPlaylists(ownerId); // busca as playlists do usuário a partir do PlaylistService
-  res.json(userPlaylists); // retorna as playlists como uma resposta JSON
 });
 
 app.get('/musics', function (req, res) {
@@ -247,7 +127,7 @@ app.delete('/playlist/:id', function (req, res) {
 app.post('/playlist', function (req: express.Request, res: express.Response) {
   const playlist: Playlist = <Playlist>req.body;
   try {
-    const result = playlistService.add(playlist);
+    const result = playlistService.addPlaylist(playlist);
     if (result) {
       res.status(201).send(result);
     } else {
@@ -261,7 +141,8 @@ app.post('/playlist', function (req: express.Request, res: express.Response) {
 
 app.put('/playlist', function (req: express.Request, res: express.Response) {
   const playlist: Playlist = <Playlist>req.body;
-  const result = playlistService.update(playlist);
+  console.log(playlist)
+  const result = playlistService.updatePlaylist(playlist);
   if (result) {
     res.send(result);
   } else {
@@ -283,14 +164,19 @@ app.post('/criar_playlist', (req: express.Request, res: express.Response) => {
   }
 });
 
-
 app.get('/minhas_playlists/:id', (req, res) => {
   const ownerId = parseInt(req.params.id);
   //console.log(ownerId) // busca o ownerId a partir dos parâmetros da requisição;
-
+  
   //const ownerId = 1
   const userPlaylists = playlistService.getUserPlaylists(ownerId); // busca as playlists do usuário a partir do PlaylistService
   res.json(userPlaylists); // retorna as playlists como uma resposta JSON
+});
+
+app.get('/criar_playlist/:name', (req, res) => {
+  const name = req.params.name;
+  const result = playlistService.verificarNomePlaylistExistente(name);
+  res.json(result);
 });
 
 // ROTAS DE CATEGORIAS
@@ -338,6 +224,71 @@ app.delete('/category/:id', function (req: express.Request, res: express.Respons
   }
 });
 
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
+const multipartMiddleware = multipart({ uploadDir: './usuarios' });
+
+app.post('/usuarios', multipartMiddleware, (req, res) => {
+  const files = req.body;
+  console.log(files)
+  //const userJson = JSON.stringify(files);
+  const filePath = './usuarios/user.json';
+
+  // Verifica se o arquivo já existe
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    let users = [];
+
+    // Se o arquivo já existe, lê o conteúdo e adiciona ao array
+    if (!err) {
+      const fileContent = fs.readFileSync(filePath);
+      users = JSON.parse(fileContent.toString());
+    }
+
+    // Adiciona o novo usuário ao array
+    users.push(files);
+
+    // Grava o array de usuários no arquivo
+    fs.writeFile(filePath, JSON.stringify(users), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to save user data.' });
+      } else {
+        res.json({ message: 'User data saved.' });
+      }
+    });
+  });
+});
+
+app.get('/usuarios', (req, res) => {
+  const filePath = './usuarios/user.json';
+
+  // Verifica se o arquivo existe
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to load user data.' });
+    } else {
+      // Lê o conteúdo do arquivo
+      const fileContent = fs.readFileSync(filePath);
+      const users = JSON.parse(fileContent.toString());
+
+      // Verifica se foi passado um email na consulta
+      const email = req.query.email;
+      if (email) {
+        // Filtra o array de usuários pelo email
+        const filteredUsers = users.filter((user: { email: string; }) => user.email === email as string);
+        res.json(filteredUsers);
+      } else {
+        // Retorna todos os usuários
+        res.json(users);
+      }
+    }
+  });
+});
 
 app.use((err: { message: any; }, req: any, res: { json: (arg0: { error: any; }) => void; }, next: any) => res.json({ error: err.message }))
 

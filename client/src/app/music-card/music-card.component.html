@@ -1,7 +1,15 @@
 <div class="card-container" name="music-container" id="music-{{name}}">
-    <img src="{{music.image}}" alt="">
+    <div class="overlay">
+        <button *ngIf="!isPausable()" class="control-btn" name="play-music" id="play-{{name}}" (click)="playMusic()">
+            <img src="/assets/play.svg" alt="">
+        </button>
+        <button *ngIf="isPausable()" class="control-btn" name="pause-music" id="pause-{{name}}" (click)="pauseMusic()">
+            <img src="/assets/pause.svg" alt="">
+        </button>
+    </div>
+    <img class="cover" src="{{music.image}}" alt="">
     <div>
         <h2 class="name" name="nome">{{name}}</h2>
-        <h3>{{author}} | <span name="category">{{category}}</span></h3>
+        <h3>{{author}} | <span name="music-category">{{category}}</span></h3>
     </div>
 </div>

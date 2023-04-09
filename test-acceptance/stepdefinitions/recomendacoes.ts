@@ -3,15 +3,9 @@ import {$, browser, by, element, ElementArrayFinder} from 'protractor';
 
 let chai = require('chai').use(require('chai-as-promised'));
 let expect = chai.expect;
-import clipboard from 'clipboardy';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function assertTamanhoEqual(set, n) {
-  await set.then(
-      elems => expect(Promise.resolve(elems.length)).to.eventually.equal(n));
 }
 
 async function getPlaylistCardByName(name) {
@@ -24,17 +18,6 @@ async function getPlaylistCardByName(name) {
   return playlistCard;
 }
 
-let sameName =
-    ((elem, name) =>
-         elem.element(by.name('nome'))
-             .getText()
-             .then(text => text.toLowerCase() === name.toLowerCase()));
-
-async function assertMusicsWithSameName(n, name) {
-  var allmusics: ElementArrayFinder = element.all(by.name('nome'));
-  var samenames = allmusics.filter(elem => sameName(elem, name));
-  await assertTamanhoEqual(samenames, n);
-}
 
 defineSupportCode(function({Given, When, Then}) {
   Given(/^I'm on the page "([^\"]*)"$/, async (name) => {
@@ -50,25 +33,25 @@ defineSupportCode(function({Given, When, Then}) {
   })
 
   Given(
-    /^the play-button of playlist "([^\"]*)" is a play button$/,
-    async (name) => {
-      const playlistCard = await getPlaylistCardByName(name);
-      const playIcon = playlistCard.element(by.name('play-button'));
-      const classListBeforeClick = await playIcon.getAttribute('class');
-      const playingBeforeClick = classListBeforeClick.includes('playing');
-      
-      if (!playingBeforeClick) {
-        await browser.actions().mouseMove(playlistCard).perform();
-        await browser.actions().mouseMove(playIcon).perform();
-        await browser.executeScript(
-            'arguments[0].click()', playIcon.getWebElement());
-      }
-      
-      const classListAfterClick = await playIcon.getAttribute('class');
-      const playingAfterClick = classListAfterClick.includes('playing');
-      await expect(playingAfterClick).to.be.true;
-    });
-  
+      /^the play-button of playlist "([^\"]*)" is a play button$/,
+      async (name) => {
+        const playlistCard = await getPlaylistCardByName(name);
+        const playIcon = playlistCard.element(by.name('play-button'));
+        const classListBeforeClick = await playIcon.getAttribute('class');
+        const playingBeforeClick = classListBeforeClick.includes('playing');
+
+        if (!playingBeforeClick) {
+          await browser.actions().mouseMove(playlistCard).perform();
+          await browser.actions().mouseMove(playIcon).perform();
+          await browser.executeScript(
+              'arguments[0].click()', playIcon.getWebElement());
+        }
+
+        const classListAfterClick = await playIcon.getAttribute('class');
+        const playingAfterClick = classListAfterClick.includes('playing');
+        await expect(playingAfterClick).to.be.true;
+      });
+
 
   Given(
       /^the play-button of playlist "([^\"]*)" is a pause button$/,
@@ -78,6 +61,21 @@ defineSupportCode(function({Given, When, Then}) {
         const classList = await playButton.getAttribute('class');
         await expect(await classList.includes('playing')).to.be.false;
       })
+
+  Given(
+      /^I don't have the playlist "([^\"]*)" saved in my liked playlists$/,
+      async (name) => {
+        await browser.get('http://localhost:4200/minhas_playlists');
+        const likedPlaylistDiv = await element(by.name('likedPlaylistsDiv'));
+        const playlistCard =
+            await likedPlaylistDiv.all(by.name('playlist-card'))
+                .filter(
+                    p => p.element(by.css('.card-title'))
+                             .getText()
+                             .then(text => text === name));
+        await expect(await playlistCard.length).to.be.equal(0);
+        await browser.get('http://localhost:4200/explorar');
+      });
 
   When(/^I try to enter the playlist page "([^\"]*)"$/, async (name) => {
     const allplaylists = element.all(by.name('nome'));
@@ -105,6 +103,16 @@ defineSupportCode(function({Given, When, Then}) {
     const playlistCard = await getPlaylistCardByName(name);
     const optionsIcon = playlistCard.element(by.name('options-button'));
     const shareIcon = playlistCard.element(by.name('Share'));
+    await browser.actions().mouseMove(optionsIcon).perform();
+    await browser.actions().mouseMove(shareIcon).perform();
+    await browser.executeScript(
+        'arguments[0].click()', shareIcon.getWebElement());
+  })
+
+  When(/^I try to like the playlist "([^\"]*)"$/, async (name) => {
+    const playlistCard = await getPlaylistCardByName(name);
+    const optionsIcon = playlistCard.element(by.name('options-button'));
+    const shareIcon = playlistCard.element(by.name('Like'));
     await browser.actions().mouseMove(optionsIcon).perform();
     await browser.actions().mouseMove(shareIcon).perform();
     await browser.executeScript(
@@ -150,6 +158,15 @@ defineSupportCode(function({Given, When, Then}) {
       });
 
   Then(
+      /^the system shows a confirmation message that the playlist "([^\"]*)" was liked$/,
+      async (name) => {
+        const playlistCard = await getPlaylistCardByName(name);
+        const confirmationMessage =
+            await playlistCard.element(by.name('liked-message'));
+        expect(await confirmationMessage.isDisplayed()).to.be.true;
+      });
+
+  Then(
       /^I see at least "([^\"]*)" recommended playlists$/,
       async (numberPlaylists) => {
         const playlists = await element.all(by.name('playlist-card'));
@@ -185,5 +202,20 @@ defineSupportCode(function({Given, When, Then}) {
         const playButton = playlistCard.element(by.name('play-button'));
         const classList = await playButton.getAttribute('class');
         await expect(await classList.includes('playing')).to.be.true;
+      });
+
+  Then(
+      /^the system has the playlist "([^\"]*)" saved in my liked playlists$/,
+      async (name) => {
+        await browser.get('http://localhost:4200/minhas_playlists');
+        const likedPlaylistDiv = await element(by.name('likedPlaylistsDiv'));
+        const playlistCard =
+            await likedPlaylistDiv.all(by.name('playlist-card'))
+                .filter(
+                    p => p.element(by.css('.card-title'))
+                             .getText()
+                             .then(text => text === name))
+                .first();
+        await expect(await playlistCard.isDisplayed()).to.be.true;
       });
 })

@@ -1,6 +1,6 @@
 <nav>
-    <button class="profile" (click)="showProfile()" *ngIf="isLogged"></button>
-    <button class="register" routerLink="/cadastro" *ngIf="!isLogged">Registrar</button>
+    <button class="profile" name="profile" (click)="showProfile()" *ngIf="isLogged"></button>
+    <button class="login" routerLink="/login" *ngIf="!isLogged">Entrar</button>
     <div class="container">
         <div class="row">
             <a routerLink="/explorar">Explorar</a>
@@ -8,7 +8,7 @@
             <a routerLink="/"><img src="../../assets/logo.png" alt="" srcset=""></a>
             <a routerLink="/em-alta">Em alta</a>
             <a routerLink="/minhas_playlists" *ngIf="isLogged">Playlists</a>
-            <a routerLink="/cadastro" *ngIf="!isLogged">Playlists</a>
+            <a name="playlists" routerLink="/cadastro" *ngIf="!isLogged">Playlists</a>
         </div>
     </div>
     <app-profilepage id="pp" *ngIf="show" (logOutEvent)="showProfile($event)"></app-profilepage>

@@ -14,9 +14,20 @@
     </div>
 
     <div class="addMusica">
-      <input type="search" class="input_musica" placeholder="Música">
+      <input type="search" class="input_musica" placeholder="Música" (click)="exibirOpcoesMusicas()" (keyup)="filtrarMusicas($event)">
       <i class="fas fa-search" aria-hidden="true"></i>
+
+      <div class="popup" [hidden]="!exibirPopup">
+        <ul class="opcoes_musica">
+          <li *ngFor="let musica of musicasFiltradas" (click)="adicionarMusica(musica)">{{musica}}</li>
+        </ul>
+      </div>
     </div>
+
+    <div class="musicas_adicionadas">
+      <li *ngFor="let musica of musicas_add.getValue()">{{ musica.name }}</li>
+    </div>
+
 
     <div class="publicavel">
       <label class="button_toggle">

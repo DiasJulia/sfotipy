@@ -1,23 +1,20 @@
-
 <div class="campo1">
   <p class="minhas_playlists">Minhas Playlists</p>
   <button *ngIf="numPlaylists === 0" type="button" class="addPlaylist" (click)="redirecionarParaCriarPlaylist()">+</button>
   <div *ngIf="numPlaylists > 0" class="playlistsDIV">
-    <div *ngFor="let playlist of playlists">
-      <button type="button" class="playlistButton" (click)="redirectplaylist(playlist.id)"></button>
-      <p class="playlist_name">{{ playlist.name }}</p>
+    <div *ngFor="let playlist of playlistsUser">
+      <app-playlist-card-recomend [playlist]="playlist"></app-playlist-card-recomend>
     </div>
     <button type="button" class="addPlaylist" (click)="redirecionarParaCriarPlaylist()">+</button>
   </div>
 </div>
 
 <div class="campo2">
-  <p class="followed_playlist">Playlists que sigo</p>
-  <button type="button" class="following_playlistsButton"></button>
+  <p class="minhas_playlists">Playlists que sigo</p>
+  <div class="playlistsDIV" name = "likedPlaylistsDiv">
+    <div *ngFor="let playlist of likedPlaylists">
+      <app-playlist-card-recomend [playlist]="playlist"></app-playlist-card-recomend>
+    </div>
+  </div>
 </div>
-
-<div class="line-1"></div>
-<div class="playbar">
-</div>
-
 

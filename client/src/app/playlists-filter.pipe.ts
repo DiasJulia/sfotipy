@@ -6,24 +6,24 @@ import { Playlist } from '../../../common/playlist';
 })
 export class PlaylistsFilterPipe implements PipeTransform {
 
-  transform(playlists: Playlist[], filterText: string): Playlist[] {
+  transform(playlists: Playlist[], filterText: string, filterCategory: number[]): Playlist[] {
     if (!playlists) {
       return [];
     }
-    if (!filterText) {
+    if (!filterText && !filterCategory.length) {
       return playlists;
     }
 
     return playlists.filter(playlist => {
-      return this.playlistContainsFilterText(playlist, filterText);
+      return this.playlistContainsFilterText(playlist, filterText, filterCategory);
     });
   }
 
-  private playlistContainsFilterText(playlist: Playlist, filterText: string): boolean {
+  private playlistContainsFilterText(playlist: Playlist, filterText: string, filterCategory: number[]): boolean {
     filterText = filterText.toLocaleLowerCase();
     const filterTerms = filterText.split(' ');
     for (const filterTerm of filterTerms) {
-      const hasFilterTerm = this.playlistContainsFilterTerm(playlist, filterTerm);
+      const hasFilterTerm = this.playlistContainsFilterTerm(playlist, filterTerm, filterCategory);
       if (hasFilterTerm === false) {
         return false;
       }
@@ -32,8 +32,8 @@ export class PlaylistsFilterPipe implements PipeTransform {
     return true;
   }
 
-  private playlistContainsFilterTerm(playlist: Playlist, filterTerm: string) {
-    return playlist.name.toLocaleLowerCase().includes(filterTerm);
+  private playlistContainsFilterTerm(playlist: Playlist, filterTerm: string, filterCategory: number[]) {
+    return (!filterTerm || playlist.name.toLocaleLowerCase().includes(filterTerm)) && (!filterCategory.length || filterCategory.some(e => playlist.categories.includes(e)))
   }
 
 }

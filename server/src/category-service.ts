@@ -15,6 +15,7 @@ export class CategoryService {
   }
 
   getById(categoryId: number): Category {
-    return this.categories.find(({ id }) => id == categoryId);
+    const result = this.categories.find(({ id }) => id == categoryId);
+    return result ? result : <Category>{ 'id': 0, 'name': 'Categoria Inválida' };
   }
 }

@@ -5,7 +5,15 @@ import { MusicService } from '../src/music-service';
 describe("O servico de músicas", () => {
     var musicService: MusicService;
 
-    beforeEach(() => musicService = new MusicService())
+    beforeAll(() => {
+        process.stdout.write("music-service: ");
+    });
+
+    beforeEach(() => musicService = new MusicService());
+
+    afterAll(() => {
+        console.log("\n");
+    });
 
     it("Inicialmente conta com 25 músicas", () => {
         expect(musicService.musics.length).toBe(25);

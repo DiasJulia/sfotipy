@@ -41,10 +41,11 @@
         <div id="section-playlists" name="content-section" *ngIf="playlistIsActive">
             <h1>Playlists</h1>
             <div class="playlistslista">
-                <div class="empty-search-message" *ngIf="!(playlists | playlistsFilter: filterText)?.length">
+                <div class="empty-search-message"
+                    *ngIf="!(playlists | playlistsFilter: filterText: getCategoriesId())?.length">
                     <p>Nenhum resultado encontrado.</p>
                 </div>
-                <app-playlist-card-recomend *ngFor="let p of playlists | playlistsFilter: filterText"
+                <app-playlist-card-recomend *ngFor="let p of playlists | playlistsFilter: filterText: getCategoriesId()"
                     [playlist]="p"></app-playlist-card-recomend>
             </div>
         </div>

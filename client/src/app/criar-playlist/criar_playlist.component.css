@@ -171,10 +171,10 @@ svg {
     font-family: Iceland, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
       'Liberation Sans', sans-serif;
     top: 12vh;
-    width: 20%;
+    width: 100%;
 
     display: flex;
-    flex-direction: column;
+    flex-direction:row;
     flex-wrap: wrap;
   }
 
@@ -183,7 +183,7 @@ svg {
     border-radius: 15px;
     font-size: 1vw;
     background-color: #ffe5b4;
-    width: 100%;
+    width: 45%;
 
   }
 
@@ -198,6 +198,29 @@ svg {
     left: 0.2rem; /* Posicionamento do ícone */
     transform: translateY(-50%);
     color: #999; /* Cor do ícone */
+  }
+
+  .popup {
+    position: absolute;
+    max-height: 200px;
+    overflow-y: auto;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .musicas_adicionadas {
+    position: absolute;
+    max-height: 30%;
+    margin-top: 17%;
+    right: 0.5vw;
+    width: 45%;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    float: left;
   }
 
   .publicavel {

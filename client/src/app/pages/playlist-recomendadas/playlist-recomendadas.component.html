@@ -1,11 +1,11 @@
-<div class="playlists-recomendadas">
-  <h1 class = "header">playlists recomendadas</h1>
+<div class="playlists-recomendadas container">
+  <h1 class="header">Playlists recomendadas para você</h1>
+
   <div class="row">
-    <div class="cards" *ngFor="let playlist of playlistsRecomendadas">
-      <app-playlist-card-recomend
-        [playlist]="playlist" 
-        (play)="onPlay($event)">
-      </app-playlist-card-recomend>
-    </div>
+    <app-playlist-card-recomend *ngFor="let playlist of playlistsRecomendadas" [playlist]="playlist"
+      (play)="onPlay($event)">
+    </app-playlist-card-recomend>
+
   </div>
+
 </div>

@@ -7,11 +7,12 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
-            "es2016",
+            "es2022",
             "dom"
         ],
         "noImplicitAny": true,
         "outDir": "typeScript",
+
     },
     "compileOnSave": true,
 }

@@ -9,9 +9,9 @@ const musicUrl = `${baseUrl}/musics`
 describe("O servidor", () => {
   var server: any;
 
-  beforeAll(() => { server = require('../server') });
+  beforeAll(() => { server = require('../server'); process.stdout.write("server: "); });
 
-  afterAll(() => { server.closeServer() });
+  afterAll(() => { server.closeServer(); console.log("\n") });
 
   it("inicialmente retorna uma lista de músicas com músicas", () => {
     return request.get(musicUrl).then(body => expect(body).not.toBe("[]")).catch(e => expect(e).toEqual(null));

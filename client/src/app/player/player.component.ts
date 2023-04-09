@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MusicPlayerService } from '../services/music-player.service';
 
 @Component({
   selector: 'app-player',
@@ -6,14 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent {
-  isPlaying = false;
+  constructor(public musicPlayerService: MusicPlayerService) { }
 
-  startPlaying(): void {
-    console.log('startPlaying');
-    this.isPlaying = true;
-  }
-
-  stopPlaying = () => {
-    this.isPlaying = false;
-  }
 }

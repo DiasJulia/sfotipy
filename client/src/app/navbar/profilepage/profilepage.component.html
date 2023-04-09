@@ -3,13 +3,13 @@
         <div class="profile-pic">
 
         </div>
-        <div class="saudation">
+        <div class="saudation" name="name">
             Olá, <br> {{user.name}}
         </div>
     </div>
         
     <div class="profile-info" *ngIf="isLogged">
-        <p>Seguidores: {{user.followers}}</p>
+        <p name="followers">Seguidores: {{user.followers}}</p>
         <div class="profile-options">
             <button class="prf-btn">Mudar senha</button>
             <button class="prf-btnv">Excluir conta</button>

@@ -106,6 +106,36 @@ h1 {
   right: max(calc((100vw - 1300px))/2, 1em);
 }
 
+.addmusic {
+  position: fixed;
+  bottom: 150px;
+  right: max(calc((100vw - 1200px))/2, 1em);
+}
+
+.addmusicbutton {
+  background-color: #FFE5B4;
+  border-radius: 50%;
+  font-size: 5vh;
+  cursor: pointer;
+  border: #0D2538 6px solid;
+  height: 75px;
+  width: 75px;
+}
+
+.popUp {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 20%;
+  right: 20%;
+}
+
+.opcoes_musica {
+  max-height: 150px;
+  max-width: 150px;
+  overflow-y: auto;
+}
+
 .badge {
   background-color: #FFE5B4;
   border-radius: 8px;

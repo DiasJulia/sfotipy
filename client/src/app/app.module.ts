@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -8,9 +8,6 @@ import { CriacaoCategoriasComponent } from './pages/criacao-categorias/criacao-c
 
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './cadastro/cadastro.component';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { PlaylistCardComponent } from './playlist-card/playlist-card.component';
@@ -30,13 +27,13 @@ import { ArtistasEmAltaComponent } from './artistas-em-alta/artistas-em-alta.com
 import { PlaylistComponent } from './playlist/playlist.component';
 import { CompartilhamentoComponent } from './compartilhamento/compartilhamento.component';
 import { FooterComponent } from './footer/footer.component';
+import { UserPlaylistsComponent } from './user-playlists/user_playlists.component';
+import { CriarPlaylistComponent } from './criar-playlist/criar_playlist.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     CriacaoCategoriasComponent,
     NavbarComponent,
     PlayerComponent,
@@ -58,11 +55,12 @@ import { FooterComponent } from './footer/footer.component';
     PlaylistComponent,
     CompartilhamentoComponent,
     FooterComponent,
+    UserPlaylistsComponent,
+    CriarPlaylistComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
 
@@ -78,6 +76,10 @@ import { FooterComponent } from './footer/footer.component';
       {
         path: 'explorar',
         component: PlaylistRecomendadasComponent
+      },
+      {
+        path: 'em-alta',
+        component: PlaylistEmAltaComponent
       },
       {
         path: 'categorias/:id',

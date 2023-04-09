@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { retry, map } from 'rxjs/operators';
 import { Playlist } from '../../../common/playlist';
+import { Music } from '../../../common/music';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { Category } from '../../../common/category';
@@ -27,35 +28,30 @@ export class PlaylistService {
   }
 
   verificarNomePlaylistExistente(name: string): Observable<boolean> {
-    const url = `${this.appURL}/?name=${name}`;
-    return this.http.get<boolean>(url);
+    const url = `${this.appURL}/criar_playlist/${name}`;
+    return this.http.get<boolean>(url).pipe(
+      map((result) => {
+        return result;
+      })
+    );
+  }
+
+  updatePlaylistMusics(playlist : Playlist) {
+    return this.http.put(`${this.appURL}/playlist`, playlist, this.httpOptions)
+      .pipe(retry(2))
   }
 
   getUserPlaylists(ownerId: any): Observable<Playlist[]>  {
-    //console.log('ownerId:', ownerId); // adicione esta linha
     const url = `${this.appURL}/minhas_playlists/${ownerId}`;
     return this.http.get<any[]>(url).pipe(
       map(response => {
-        console.log('response:', response); // adicione esta linha
         return response.map(item => new Playlist(<Playlist>{ ...item }));
       }),
       map(playlists => {
-        console.log('playlists:', playlists.filter(playlist => playlist.ownerId === ownerId)); // adicione esta linha
         return playlists.filter(playlist => playlist.ownerId === ownerId);
       })
     );
   }
-
-  /*getUserPlaylists(ownerId: number): Observable<Playlist> {
-    const url = `${this.appURL}/minhas_playlists`;
-    return this.http.get<any[]>(url).pipe(
-      map(response => {
-        console.log(response)
-        const firstItem = response[0]; // assumindo que a resposta sempre retorna um único item
-        return new Playlist(firstItem.id, firstItem.name, firstItem.ownerId, firstItem.musics, firstItem.isPublic, firstItem.categories, firstItem.image);
-      })
-    );
-  } */
 
   getCategories(id: number) {
     this.http.get<string[]>(this.appURL + "playlist/category/" + id)
@@ -129,5 +125,20 @@ export class PlaylistService {
     const intersection = new Set([...setA].filter(x => setB.has(x)));
     const union = new Set([...setA, ...setB]);
     return intersection.size / union.size;
+  }
+
+  addFollower(idPlaylist: number, idUser: number): void {
+    this.getPlaylistById(idPlaylist).subscribe(
+      (playlist: Playlist) => {
+        if (!playlist.followers.includes(idUser)) {
+          playlist.followers.push(idUser);
+          this.http.put<Playlist>(`${this.appURL}/playlist/`, playlist)
+            .subscribe();
+        }
+      },
+      (error: any) => {
+        console.error(`Erro ao buscar playlist: ${error}`);
+      }
+    );
   }
 }

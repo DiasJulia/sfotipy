@@ -3,25 +3,26 @@
 </head>
 
 <div class="playlist-card" name="playlist-card" (click)="openPlaylistOnClick($event, playlist)">
+  <div class="categories-container" name="playlist-category-list">
+    <span *ngFor="let cat of categorias" name="playlist-category" class="badge"
+      id="playlist-cat-{{cat.name.toUpperCase()}}">{{cat.name}}</span>
+  </div>
   <img class="playlist-image" [src]="playlist.image" alt="Playlist cover">
   <div class="card-body">
     <h5 name="nome" class="card-title">{{ playlist.name }}</h5>
   </div>
   <div class="overlay" name="overlay">
-    <div class="categories-container">
-      <span *ngFor="let cat of categorias" class="badge"
-        id="selected-cat-{{cat.name.toUpperCase()}}">{{cat.name}}</span>
-    </div>
+
 
     <div class="play-button" name="play-button" [ngClass]="{'playing': playlist.isPlaying}"
       (click)="startPlayingOnClick($event)">
       <i class="fa" [ngClass]="{'fa-play': !playlist.isPlaying, 'fa-pause': playlist.isPlaying}"></i>
     </div>
 
-    <div class="options">
+    <div class="options" name = "options">
       <i class="fas fa-ellipsis-v" name="options-button" (click)="executeAction($event)"></i>
       <div class="options-menu">
-        <div class="option" name="Like" (click)="likePlaylist($event)">
+        <div class="option" name="Like" (click)="likePlaylist($event, playlist)">
           <i class="fas fa-heart"></i>
         </div>
         <div class="option" name="Share" (click)="sharePlaylist($event, playlist)">
@@ -33,6 +34,7 @@
       </div>
     </div>
 
-    <div class="share-message" name="share-message" *ngIf="showShareMessage">Link copiado</div>
+    <div class="share-message" name="share-message" *ngIf="showShareMessage">Link copiado!</div>
+    <div class="liked-message" name="liked-message" *ngIf="showLikedMessage">Playlist curtida!</div>
   </div>
 </div>

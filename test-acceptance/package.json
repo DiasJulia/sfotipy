@@ -9,7 +9,8 @@
   },
   "author": "Daniel Bastos",
   "devDependencies": {
-    "@types/cucumber": "^0.0.38",
+    "@types/clipboard": "^2.0.7",
+    "@types/cucumber": "0.0.38",
     "@types/node": "^8.0.31",
     "@types/selenium-webdriver": "^3.0.0",
     "chai": "^4.0.2",
