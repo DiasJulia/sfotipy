@@ -4,9 +4,8 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomvalidationService } from './Validators_extras';
 
 import { Router } from '@angular/router';
-
 import { User } from '../../../../common/User'
-//import { RegisterService } from './cadastro.service';
+
 import { UserService } from '../user.service';
 import { LoginService } from '../login.service';
 
@@ -19,6 +18,7 @@ export class RegisterComponent implements OnInit {
 
   RegisterForm!: FormGroup;
   submitted!: false;
+  userService: any;
 
   constructor(
     private fb: FormBuilder,
@@ -75,23 +75,21 @@ export class RegisterComponent implements OnInit {
     if (this.RegisterForm.valid) {
       data = new User({
         name: data.nome,
-        email: data.email,
+        email: String(data.email).toLowerCase(),
         password: data.senha
       })
 
       this.registerService.emailExists(data.email).subscribe(
-        emailExists => {
+        emailExists => { // Verifica se o email existe
           if (emailExists) {
             this.email.setErrors({ 'emailExists': true });
           } else {
             this.registerService.addUser(data).subscribe(
               dataServer => {
-                //this.registerService.setUserId(dataServer.id);
+                this.userService.setUserId(dataServer.id);
+                console.log(dataServer.id);
                 this.loginService.updateLoginStatus(true);
-                this.RegisterForm.reset();
-                /*setTimeout(() => {
-                  this.router.navigate(['']);
-                }, 1000);*/
+                this.router.navigate(['']);
               }
             )
           }

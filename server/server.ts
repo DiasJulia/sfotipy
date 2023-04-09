@@ -29,7 +29,7 @@ const multipartMiddleware = multipart({ uploadDir: './usuarios' });
 
 app.post('/users', multipartMiddleware, (req, res) => { //Cadastro
   const files = req.body;
-  console.log(files)
+  //  console.log(files)  <== Para demonstrar os arquivos cadastrados
   const filePath = './usuarios/user.json';
 
   // Verifica se o arquivo já existe
@@ -51,7 +51,8 @@ app.post('/users', multipartMiddleware, (req, res) => { //Cadastro
         console.error(err);
         res.status(500).json({ error: 'Failed to save user data.' });
       } else {
-        res.json({ message: 'User data saved.' });
+        delete files.password;
+        res.json(files);
       }
     });
   });
