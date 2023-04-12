@@ -9,12 +9,12 @@ function sleep(ms) {
 }
 
 defineSupportCode(function ({ Given, When, Then }) {
-    Given(/^I'm on the start page $/, async (name) => {
+    Given(/^I am on the start page $/, async (name) => {
         await browser.get('http://localhost:4200/');
         await expect(browser.getTitle()).to.eventually.equal(name.toString());
     });
 
-    Given(/^I'm on the page "([^\"]*)"$/, async (name) => {
+    Given(/^I am on the page "([^\"]*)"$/, async (name) => {
         await browser.get('http://localhost:4200/' + name.toString().toLowerCase());
         await expect(browser.getTitle()).to.eventually.equal(name.toString());
     });
