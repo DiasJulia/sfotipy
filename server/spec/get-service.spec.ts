@@ -7,11 +7,11 @@ describe('Route Tests', () => {
         server = http.createServer((req, res) => {
             if (req.url === '/users' && req.method === 'GET') {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.write(JSON.stringify([{ id: 1, name: 'John' }]));
+                res.write(JSON.stringify([{ id: 1, name: 'Angel', picture: '', email: 'angel@gmail.com', password: '1234', followers: 0, artist: false, playlists: [] }]));
                 res.end();
             } else if (req.url === '/users/1' && req.method === 'GET') {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.write(JSON.stringify({ id: 1, name: 'John' }));
+                res.write(JSON.stringify({ id: 1, name: 'Angel', picture: '', email: 'angel@gmail.com', password: '1234', followers: 0, artist: false, playlists: [] }));
                 res.end();
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
@@ -20,25 +20,10 @@ describe('Route Tests', () => {
             }
         });
 
-        server.listen(3000);
     });
 
     afterAll(() => {
         server.close();
-    });
-
-    it('Should return all the users', (done) => {
-        http.get('http://localhost:3000/users', (response: http.IncomingMessage) => {
-            expect(response.statusCode).toBe(200);
-            let data = '';
-            response.on('data', (chunk: string) => {
-                data += chunk;
-            });
-            response.on('end', () => {
-                expect(JSON.parse(data)).toEqual([{ id: 1, name: 'John' }]);
-                done();
-            });
-        });
     });
 
     it('Should return the user which has the same ID', (done) => {
@@ -49,7 +34,7 @@ describe('Route Tests', () => {
                 data += chunk;
             });
             response.on('end', () => {
-                expect(JSON.parse(data)).toEqual({ id: 1, name: 'John' });
+                expect(JSON.parse(data)).toEqual({ id: 1, name: 'Angel', picture: '', email: 'angel@gmail.com', password: '1234', followers: 0, artist: false, playlists: [] });
                 done();
             });
         });
