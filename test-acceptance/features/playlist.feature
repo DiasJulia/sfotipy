@@ -51,4 +51,5 @@ So that I can create and manage my playlists
         And I add the music "Thunder"
         Then The "pop" playlist page is refreshed
         And I can see the music "Thunder" in the playlist page
-            
+    
+    
