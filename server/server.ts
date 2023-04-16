@@ -218,6 +218,7 @@ app.put('/musics', function (req: express.Request, res: express.Response) {
 //ROTAS DE PLAYLIST
 
 app.get('/playlists', function (req, res) {
+  debugger
   const playlists = playlistService.get();
   res.send(JSON.stringify(playlists));
 });

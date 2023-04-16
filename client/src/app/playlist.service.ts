@@ -12,7 +12,7 @@ import { Category } from '../../../common/category';
 })
 export class PlaylistService {
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  private appURL = 'http://localhost:3000';
+  private appURL = 'http://localhost:4200';
 
   private httpOptions = {
     headers: new HttpHeaders({
